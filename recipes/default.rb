@@ -22,13 +22,15 @@
 # 2. CentOS7 or greater supported
 docker_service 'default' do
    storage_driver 'overlay'
+   action [:create, :start]
 end
 
 # Pipeline
 # 1. Download dcos_generate_config.sh to $HOME
 #   - Note this link does not have versioning, so using it will always be the latest DCOS. This URL might change in the future, but for now this cookbook will only install the latest stable release.
 remote_file "/root/dcos_generate_config.sh" do
-  source "https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh"
+  # source "https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh"
+  source "https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh"
   # owner 'web_admin'
   # group 'web_admin'
   mode '0755'
