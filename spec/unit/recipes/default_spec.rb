@@ -8,17 +8,17 @@ require 'spec_helper'
 describe 'dcos::default' do
   context 'Default behavior, assume eth0' do
     let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new
-      node.set['network']['interfaces']['eth0']['addresses'] =
-        {
-        '1.2.3.4' =>
+      ChefSpec::SoloRunner.new do |node|
+        node.set['network']['interfaces']['eth0']['addresses'] =
           {
-          'family' => 'inet',
-          'netmask' => '255.255.255.0',
-          'broadcast' => '192.168.1.255'
+            '1.2.3.4' =>
+              {
+                'family' => 'inet',
+                'netmask' => '255.255.255.0',
+                'broadcast' => '192.168.1.255'
+              }
           }
-        }
-      runner.converge(described_recipe)
+      end.converge(described_recipe)
     end
 
     it 'installs unzip' do
