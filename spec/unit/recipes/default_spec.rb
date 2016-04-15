@@ -6,10 +6,23 @@
 require 'spec_helper'
 
 describe 'dcos::default' do
-  context 'When all attributes are default, on an unspecified platform' do
+  context 'Default behavior, assume eth0' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new
+      node.set['network']['interfaces']['eth0']['addresses'] =
+        {
+        '1.2.3.4' =>
+          {
+          'family' => 'inet',
+          'netmask' => '255.255.255.0',
+          'broadcast' => '192.168.1.255'
+          }
+        }
       runner.converge(described_recipe)
+    end
+
+    it 'installs unzip' do
+      expect(chef_run).to install_package('unzip')
     end
 
     it 'converges successfully' do
