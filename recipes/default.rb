@@ -51,9 +51,20 @@ include_recipe 'dcos::_ip-detect'
 
 execute "dcos-genconf" do
   command "/root/dcos_generate_config.sh --genconf"
+  user "root"
   cwd "/root"
+  not_if do
+    File.exist?('/root/genconf/cluster_packages.json')
+  end
 end
 
-# 5. Execute installation: $HOME/genconf/serve/dcos_install.sh $DCOS_ROLE {master | slave | slave_public}
+file "/root/genconf/serve/dcos_install.sh" do
+  mode '0755'
+end
 
-# This should be enough to get you started, please keep in touch over the next couple of weeks and don't ever hesitate to reach out!
+# Execute installation: $HOME/genconf/serve/dcos_install.sh $DCOS_ROLE {master | slave | slave_public}
+execute 'dcos_install' do
+  command "/root/genconf/serve/dcos_install.sh #{node['dcos']['dcos_role']}"
+  user "root"
+  cwd "/root"
+end
