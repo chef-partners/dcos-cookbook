@@ -21,9 +21,34 @@ describe 'dcos::default' do
       end.converge(described_recipe)
     end
 
+    it 'stops service firewalld' do
+      expect(chef_run).to stop_service('firewalld')
+    end
+
+    it 'disables service firewalld' do
+      expect(chef_run).to disable_service('firewalld')
+    end
+
     it 'installs unzip' do
       expect(chef_run).to install_package('unzip')
     end
+
+    it 'installs ipset' do
+      expect(chef_run).to install_package('ipset')
+    end
+
+    it 'creates group[nogroup]' do
+      expect(chef_run).to create_group('nogroup')
+    end
+
+    # docker_service
+    # remote_file
+    # directory
+    # template
+    # include_recipe
+    # execute
+    # file
+    # execute
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
