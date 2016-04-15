@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: mesosphere
+# Cookbook Name:: dcos
 # Recipe:: default
 #
 # Copyright 2016, Chef Software, Inc.
@@ -18,43 +18,37 @@
 #
 
 # Prereqs
-# 1. Install docker with overlayfs
-# 2. CentOS7 or greater supported
+package 'unzip'
+
+package 'ipset'
+
+group 'nogroup'
+
+# Install docker with overlayfs
 docker_service 'default' do
    storage_driver 'overlay'
    action [:create, :start]
 end
 
-# Pipeline
-# 1. Download dcos_generate_config.sh to $HOME
-#   - Note this link does not have versioning, so using it will always be the latest DCOS. This URL might change in the future, but for now this cookbook will only install the latest stable release.
+# Download dcos_generate_config.sh to $HOME
+# Note this link does not have versioning, so using it will always be the latest DCOS. This URL might change in the future, but for now this cookbook will only install the latest stable release.
 remote_file "/root/dcos_generate_config.sh" do
   # source "https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh"
   source "https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh"
-  # owner 'web_admin'
-  # group 'web_admin'
   mode '0755'
-  # action :create
 end
 
-# 2. mkdir $HOME/genconf && touch $HOME/genconf/config.yaml
 directory "/root/genconf" do
-  # owner 'root'
-  # group 'root'
   mode '0755'
-  # action :create
 end
 
-# 3. The config file several parameters, some parameters have dependencies. The most basic config.yaml looks like this:
 template "/root/genconf/config.yaml" do
   source 'config.yaml.erb'
-  # owner 'root'
-  # group 'root'
-  # mode '0644'
-  # action :create
 end
 
-# 4. Execute --genconf: $HOME/dcos_generate_config.sh --genconf
+# generate the /root/genconf/ip-detect script
+include_recipe 'dcos::_ip-detect'
+
 execute "dcos-genconf" do
   command "/root/dcos_generate_config.sh --genconf"
   cwd "/root"

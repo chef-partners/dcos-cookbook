@@ -1,4 +1,4 @@
-name 'mesosphere'
+name 'dcos'
 maintainer 'Chef Software, Inc.'
 maintainer_email 'partnereng@chef.io'
 license 'Apache 2.0'

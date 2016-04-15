@@ -1,7 +1,13 @@
 ---
-cluster_name:'<%= node["mesosphere"]["cluster_name"] %>'
-master_discovery:'<%= node["mesosphere"]["master_discovery"] %>'
-exhibitor_storage_backend:'<%= node["mesosphere"]["exhibitor_storage_backend"] %>'
-bootstrap_url:'<%= node["mesosphere"]["bootstrap_url"] %>'
-master_list:[<% node["mesosphere"]["master_list"].each do |ip| %>'<%= ip %>', <% end %>]
-resolvers:[<% node["mesosphere"]["resolvers"].each do |ip| %>'<%= ip %>', <% end %>]
+cluster_name: '<%= node["dcos"]["cluster_name"] %>'
+master_discovery: '<%= node["dcos"]["master_discovery"] %>'
+exhibitor_storage_backend: '<%= node["dcos"]["exhibitor_storage_backend"] %>'
+bootstrap_url: '<%= node["dcos"]["bootstrap_url"] %>'
+master_list:
+<% node["dcos"]["master_list"].each do |ip| %>
+  - <%= ip %>
+<% end %>
+resolvers:
+<% node["dcos"]["resolvers"].each do |ip| %>
+  - <%= ip %>
+<% end %>
