@@ -1,0 +1,4 @@
+# Configuration parameters: ExpectMatchingDefinition, Regex, IgnoreExecutableScripts.
+Style/FileName:
+  Exclude:
+    - 'recipes/_ip-detect.rb'

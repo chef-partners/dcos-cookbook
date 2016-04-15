@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-# generates a genconf/ip-detect script based on the node['dcos']['ip-detect'] attribute
+# generates a genconf/ip-detect script based on the node['dcos']['ip-detect']
 # https://docs.mesosphere.com/archived-dcos-enterprise-edition/installing-enterprise-edition-1-5/create-a-script-for-ip-address-discovery/
 
 if node['dcos']['ip-detect'].eql? 'aws'
@@ -32,17 +32,14 @@ elsif node['dcos']['ip-detect'].eql? 'gce'
   end
 else
   # find the ipaddress for that interface
-  addresses = node['network']['interfaces'][node['dcos']['ip-detect']]['addresses']
+  interface = node['dcos']['ip-detect']
+  addresses = node['network']['interfaces'][interface]['addresses']
   addresses.select do |ip, data|
-
     template '/root/genconf/ip-detect' do
       source 'ip-detect.erb'
       only_if { data['family'].eql?('inet') }
       mode '0755'
-      variables({
-        :ip => ip
-      })
+      variables(ip: ip)
     end
-
   end
 end

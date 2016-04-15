@@ -18,7 +18,7 @@
 #
 
 # Prereqs
-selinux_state "SELinux Permissive" do
+selinux_state 'SELinux Permissive' do
   action :permissive
 end
 
@@ -34,45 +34,44 @@ group 'nogroup'
 
 # Install docker with overlayfs
 docker_service 'default' do
-   storage_driver 'overlay'
-   action [:create, :start]
+  storage_driver 'overlay'
+  action [:create, :start]
 end
 
-# Download dcos_generate_config.sh to $HOME
-# Note this link does not have versioning, so using it will always be the latest DCOS. This URL might change in the future, but for now this cookbook will only install the latest stable release.
-remote_file "/root/dcos_generate_config.sh" do
-  # source "https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh"
-  source "https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh"
+# Note this link does not have versioning, so using it will always be the latest
+# DCOS from 'testing' and this URL might change in the future.
+# https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh
+remote_file '/root/dcos_generate_config.sh' do
+  source 'https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh'
   mode '0755'
 end
 
-directory "/root/genconf" do
+directory '/root/genconf' do
   mode '0755'
 end
 
-template "/root/genconf/config.yaml" do
+template '/root/genconf/config.yaml' do
   source 'config.yaml.erb'
 end
 
 # generate the /root/genconf/ip-detect script
 include_recipe 'dcos::_ip-detect'
 
-execute "dcos-genconf" do
-  command "/root/dcos_generate_config.sh --genconf"
-  user "root"
-  cwd "/root"
+execute 'dcos-genconf' do
+  command '/root/dcos_generate_config.sh --genconf'
+  user 'root'
+  cwd '/root'
   not_if do
     File.exist?('/root/genconf/cluster_packages.json')
   end
 end
 
-file "/root/genconf/serve/dcos_install.sh" do
+file '/root/genconf/serve/dcos_install.sh' do
   mode '0755'
 end
 
-# Execute installation: $HOME/genconf/serve/dcos_install.sh $DCOS_ROLE {master | slave | slave_public}
 execute 'dcos_install' do
   command "/root/genconf/serve/dcos_install.sh #{node['dcos']['dcos_role']}"
-  user "root"
-  cwd "/root"
+  user 'root'
+  cwd '/root'
 end

@@ -6,8 +6,10 @@ description 'Installs/Configures Mesosphere'
 long_description 'Installs/Configures Mesosphere'
 version '0.1.0'
 
-source_url 'https://github.com/chef-partners/dcos-cookbook' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-partners/dcos-cookbook/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/chef-partners/dcos-cookbook' if
+  respond_to?(:source_url)
+issues_url 'https://github.com/chef-partners/dcos-cookbook/issues' if
+  respond_to?(:issues_url)
 
 supports 'centos'
 supports 'oracle'

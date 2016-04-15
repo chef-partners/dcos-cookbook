@@ -18,7 +18,7 @@
 #
 
 default['dcos']['dcos_version'] = 'stable'
-default['dcos']['dcos_role'] = 'master' # options are master, slave or slave_public
+default['dcos']['dcos_role'] = 'master' # 'master', 'slave' or 'slave_public'
 
 default['dcos']['cluster_name'] = 'DCOS'
 default['dcos']['master_discovery'] = 'static'
