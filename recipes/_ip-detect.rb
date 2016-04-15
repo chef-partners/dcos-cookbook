@@ -34,16 +34,15 @@ else
   # find the ipaddress for that interface
   addresses = node['network']['interfaces'][node['dcos']['ip-detect']]['addresses']
   addresses.select do |ip, data|
-    if data['family'].eql?('inet')
 
-      template '/root/genconf/ip-detect' do
-        source 'ip-detect.erb'
-        mode '0755'
-        variables({
-          :ip => ip
-        })
-      end
-
+    template '/root/genconf/ip-detect' do
+      source 'ip-detect.erb'
+      only_if { data['family'].eql?('inet') }
+      mode '0755'
+      variables({
+        :ip => ip
+      })
     end
+
   end
 end
