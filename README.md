@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chef-partners/dcos-cookbook.svg?branch=master)](https://travis-ci.org/chef-partners/dcos-cookbook)
+
 Description
 ===========
 
