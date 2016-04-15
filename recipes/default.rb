@@ -18,6 +18,14 @@
 #
 
 # Prereqs
+selinux_state "SELinux Permissive" do
+  action :permissive
+end
+
+service 'firewalld' do
+  action [:stop, :disable]
+end
+
 package 'unzip'
 
 package 'ipset'

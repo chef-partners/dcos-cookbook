@@ -23,7 +23,7 @@ default['dcos']['dcos_role'] = 'master' # options are master, slave or slave_pub
 default['dcos']['cluster_name'] = 'DCOS'
 default['dcos']['master_discovery'] = 'static'
 default['dcos']['exhibitor_storage_backend'] = 'static'
-default['dcos']['bootstrap_url'] = 'file:///opt/dcos_install_tmp'
+default['dcos']['bootstrap_url'] = 'file:///root/genconf/serve'
 
 # determine how to generate the genconf/ip-detect script
 # 'aws' or 'gce' will use the local ipv4 address from the metadata service

@@ -12,3 +12,4 @@ supports 'redhat'
 supports 'scientific'
 
 depends 'docker', '~> 2.0'
+depends 'selinux', '~> 0.9.0'
