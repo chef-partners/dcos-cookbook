@@ -13,9 +13,12 @@ Only Red Hat or CentOS 7.x are currently supported.
 Usage
 ==========
 
-The behavior of this cookbook is managed by attributes documented in the [attributes file](attributes/default.rb). The `node['dcos']['dcos_role']` attribute controls the DCOS role to apply to the node (default is `master`). The `node['dcos']['master_list']` must be set to specify the list of DCOS master node IPv4 addresses to connect at startup.
+The behavior of this cookbook is managed by attributes documented in the [attributes file](attributes/default.rb). The `node['dcos']['dcos_role']` attribute controls the DCOS role to apply to the node (default is `master`). The `node['dcos']['master_list']` must be set to specify the list of DCOS master node IPv4 addresses to connect at startup (this must be an odd number of masters).
 
-you can create a Chef role and apply it to nodes as necessary to specify `master`, `slave` and `slave-public` as appropriate. Any additional configuration should probably be set as override attributes in an Environment to ensure all nodes receive those global settings.
+Roles
+----------
+
+You can create a Chef Role and apply it to nodes as necessary to specify `master`, `slave` and `slave-public` as appropriate. Any additional configuration should probably be set as override attributes in an Environment to ensure all nodes receive those global settings.
 
 ### Example Role dcos_master.rb ###
 ````ruby
@@ -23,7 +26,18 @@ name "dcos_master"
 description "DCOS master role"
 run_list "recipe[dcos]"
 default_attributes "dcos" => {
-    "dcos_role" => [ "master" ]
+    "dcos_role" => "master"
+    "master_list" => [ "10.0.2.10" ]
+}
+````
+
+### Example Role dcos_slave.rb ###
+````ruby
+name "dcos_slave"
+description "DCOS slave role"
+run_list "recipe[dcos]"
+default_attributes "dcos" => {
+    "dcos_role" => "slave"
     "master_list" => [ "10.0.2.10" ]
 }
 ````
@@ -35,6 +49,18 @@ default
 -------
 
 Installs the prerequisites for the Mesosphere DCOS installation, including packages, groups and Docker with OverlayFS enabled. It then downloads and runs the installation package with the settings configured by the node's attributes.
+
+Testing
+=======
+
+ChefSpec
+--------
+
+InSpec
+------
+
+Test Kitchen
+------------
 
 License and Author
 ==================
