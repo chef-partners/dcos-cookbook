@@ -68,10 +68,14 @@ end
 
 file '/root/genconf/serve/dcos_install.sh' do
   mode '0755'
+  subscribes :create, 'execute[dcos-genconf]', :immediately
+  action :nothing
 end
 
 execute 'dcos_install' do
   command "/root/genconf/serve/dcos_install.sh #{node['dcos']['dcos_role']}"
   user 'root'
   cwd '/root'
+  subscribes :run, 'file[/root/genconf/serve/dcos_install.sh]', :immediately
+  action :nothing
 end
