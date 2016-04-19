@@ -57,10 +57,6 @@ describe 'dcos::default' do
       expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
     end
 
-    it 'sets permissions on dcos_install.sh' do
-      expect(chef_run).to create_file('/root/genconf/serve/dcos_install.sh').with(mode: '0755')
-    end
-
     it 'executes[dcos_install]' do
       expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
     end
