@@ -43,16 +43,25 @@ describe 'dcos::default' do
 
     # docker_service
     # remote_file
-    # directory
+
+    it 'creates genconf directory' do
+      expect(chef_run).to create_directory('/root/genconf').with(mode: '0755')
+    end
+
     # template
     # include_recipe
-    # execute
+
+    it 'dcos-genconf' do
+      expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
+    end
 
     it 'sets permissions on dcos_install.sh' do
       expect(chef_run).to create_file('/root/genconf/serve/dcos_install.sh').with(mode: '0755')
     end
 
-    # execute
+    it 'dcos_install' do
+      expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
+    end
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
