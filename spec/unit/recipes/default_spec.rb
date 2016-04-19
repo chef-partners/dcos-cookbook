@@ -41,17 +41,19 @@ describe 'dcos::default' do
       expect(chef_run).to create_group('nogroup')
     end
 
-    # docker_service
-    # remote_file
+    it 'creates remote_file[dcos_generate_config.sh]' do
+      expect(chef_run).to create_remote_file('/root/dcos_generate_config.sh').with(mode: '0755')
+    end
 
-    it 'creates genconf directory' do
+    it 'creates directory[genconf]' do
       expect(chef_run).to create_directory('/root/genconf').with(mode: '0755')
     end
 
-    # template
-    # include_recipe
+    it 'creates template[config.yaml]' do
+      expect(chef_run).to create_template('/root/genconf/config.yaml')
+    end
 
-    it 'dcos-genconf' do
+    it 'executes[dcos-genconf]' do
       expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
     end
 
@@ -59,7 +61,7 @@ describe 'dcos::default' do
       expect(chef_run).to create_file('/root/genconf/serve/dcos_install.sh').with(mode: '0755')
     end
 
-    it 'dcos_install' do
+    it 'executes[dcos_install]' do
       expect(chef_run).to run_execute('dcos-genconf').with(user: 'root')
     end
 
