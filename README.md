@@ -55,12 +55,15 @@ Testing
 
 ChefSpec
 --------
+There is basic coverage for the default recipe.
 
 InSpec
 ------
+TBD
 
 Test Kitchen
 ------------
+The included [.kitchen.yml](.kitchen.yml) runs the default master deployment in a generic fashion. The included [.kitchen.local.yml.example](.kitchen.local.yml.example) shows alternate settings for running multi-master with slaves on GCE (you will have to rename and update accordingly).
 
 License and Author
 ==================
