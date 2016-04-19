@@ -1,0 +1,13 @@
+---
+cluster_name: '<%= node["dcos"]["cluster_name"] %>'
+master_discovery: '<%= node["dcos"]["master_discovery"] %>'
+exhibitor_storage_backend: '<%= node["dcos"]["exhibitor_storage_backend"] %>'
+bootstrap_url: '<%= node["dcos"]["bootstrap_url"] %>'
+master_list:
+<% node["dcos"]["master_list"].each do |ip| %>
+  - <%= ip %>
+<% end %>
+resolvers:
+<% node["dcos"]["resolvers"].each do |ip| %>
+  - <%= ip %>
+<% end %>

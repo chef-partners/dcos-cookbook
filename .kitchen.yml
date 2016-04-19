@@ -14,5 +14,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mesosphere::default]
+      - recipe[dcos::default]
     attributes:
+      dcos:
+        master_list: ['127.0.0.1']

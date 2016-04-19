@@ -1,0 +1,70 @@
+---
+driver:
+  name: gce
+  project: chef-marketplace-dev
+  zone: us-central1-a
+  preemptible: true
+  email: matt@chef.io
+  tags:
+    - mesosphere
+    - test-kitchen
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+
+transport:
+  username: mray
+  ssh_key:
+    - ~/.ssh/google_compute_engine
+
+platforms:
+  - name: centos-7.2
+    driver:
+      image_name: centos-7
+
+suites:
+  - name: default
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        master_list: ['127.0.0.1']
+  - name: gm1
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        ip-detect: 'gce'
+        dcos_role: 'master'
+        master_list: ['10.240.0.2', '10.240.0.3', '10.240.0.4']
+  - name: gm2
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        ip-detect: 'gce'
+        dcos_role: 'master'
+        master_list: ['10.240.0.2', '10.240.0.3', '10.240.0.4']
+  - name: gm3
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        dcos_role: 'master'
+        master_list: ['10.240.0.2', '10.240.0.3', '10.240.0.4']
+  - name: gs1
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        ip-detect: 'gce'
+        dcos_role: 'slave'
+        master_list: ['10.240.0.2', '10.240.0.3', '10.240.0.4']
+  - name: gs2
+    run_list:
+      - recipe[dcos::default]
+    attributes:
+      dcos:
+        ip-detect: 'gce'
+        dcos_role: 'slave'
+        master_list: ['10.240.0.2', '10.240.0.3', '10.240.0.4']

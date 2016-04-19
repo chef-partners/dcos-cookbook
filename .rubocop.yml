@@ -1,0 +1,6 @@
+Style/FileName:
+  Exclude:
+    - 'recipes/_ip-detect.rb'
+
+LineLength:
+  Enabled: false
