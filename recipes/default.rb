@@ -42,7 +42,7 @@ end
 # DCOS from 'testing' and this URL might change in the future.
 # https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh
 remote_file '/root/dcos_generate_config.sh' do
-  source 'https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh'
+  source 'https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh'
   mode '0755'
 end
 
