@@ -39,10 +39,9 @@ docker_service 'default' do
 end
 
 # Note this link does not have versioning, so using it will always be the latest
-# DCOS from 'testing' and this URL might change in the future.
-# https://s3.amazonaws.com/downloads.mesosphere.io/dcos/stable/dcos_generate_config.sh
+# DCOS from https://dcos.io/docs/1.7/administration/installing/local/
 remote_file '/root/dcos_generate_config.sh' do
-  source 'https://downloads.mesosphere.io/dcos/testing/continuous/dcos_generate_config.sh'
+  source 'https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh'
   mode '0755'
 end
 
