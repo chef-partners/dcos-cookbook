@@ -18,7 +18,7 @@ The behavior of this cookbook is managed by attributes documented in the [attrib
 Roles
 ----------
 
-You can create a Chef Role and apply it to nodes as necessary to specify `master`, `slave` and `slave-public` as appropriate. Any additional configuration should probably be set as override attributes in an Environment to ensure all nodes receive those global settings.
+You can create a Chef Role and apply it to nodes as necessary to specify `master`, `slave` and `slave_public` as appropriate. Any additional configuration should probably be set as override attributes in an Environment to ensure all nodes receive those global settings.
 
 ### Example Role dcos_master.rb ###
 ````ruby
