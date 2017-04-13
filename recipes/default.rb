@@ -38,10 +38,16 @@ docker_service 'default' do
   action [:create, :start]
 end
 
+if node['dcos']['dcos_earlyaccess'] = true
+  location = 'https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh'
+else
+  location = 'https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh'
+end
+
 # Note this link does not have versioning, so using it will always be the latest
 # DCOS from https://dcos.io/docs/1.7/administration/installing/local/
 remote_file '/root/dcos_generate_config.sh' do
-  source 'https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh'
+  source location
   mode '0755'
 end
 

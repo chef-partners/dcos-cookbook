@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+default['dcos']['dcos_earlyaccess'] = true
 default['dcos']['dcos_version'] = 'stable'
 default['dcos']['dcos_role'] = 'master' # 'master', 'slave' or 'slave_public'
 
