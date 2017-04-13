@@ -15,6 +15,8 @@ Usage
 
 The behavior of this cookbook is managed by attributes documented in the [attributes file](attributes/default.rb). The `node['dcos']['dcos_role']` attribute controls the DCOS role to apply to the node (default is `master`). The `node['dcos']['master_list']` must be set to specify the list of DCOS master node IPv4 addresses to connect at startup (this must be an odd number of masters).
 
+If you would like to have the stable channel, please flip the `node['dcos']['dcos_earlyaccess']` to `false`.
+
 Roles
 ----------
 
