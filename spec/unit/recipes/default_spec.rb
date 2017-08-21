@@ -15,8 +15,8 @@ describe 'dcos::default' do
               {
                 'family' => 'inet',
                 'netmask' => '255.255.255.0',
-                'broadcast' => '192.168.1.255'
-              }
+                'broadcast' => '192.168.1.255',
+              },
           }
       end.converge(described_recipe)
     end
