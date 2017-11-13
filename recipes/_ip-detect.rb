@@ -20,26 +20,25 @@
 # generates a genconf/ip-detect script based on the node['dcos']['ip-detect']
 # https://docs.mesosphere.com/archived-dcos-enterprise-edition/installing-enterprise-edition-1-5/create-a-script-for-ip-address-discovery/
 
-if node['dcos']['ip-detect'].eql? 'aws'
-  cookbook_file '/root/genconf/ip-detect' do
-    source 'aws'
+if %w(aws gce).include?(node['dcos']['ip-detect'])
+  cookbook_file '/usr/src/dcos/genconf/ip-detect' do
+    source node['dcos']['ip-detect']
     mode '0755'
   end
-elsif node['dcos']['ip-detect'].eql? 'gce'
-  cookbook_file '/root/genconf/ip-detect' do
-    source 'gce'
+  cookbook_file '/usr/src/dcos/genconf/ip-detect-public' do
+    source "#{node['dcos']['ip-detect']}_public"
     mode '0755'
   end
 else
   # find the ipaddress for that interface
   interface = node['dcos']['ip-detect']
-  addresses = node['network']['interfaces'][interface]['addresses']
-  addresses.select do |ip, data|
-    template '/root/genconf/ip-detect' do
-      source 'ip-detect.erb'
-      only_if { data['family'].eql?('inet') }
-      mode '0755'
-      variables(ip: ip)
-    end
+  template '/usr/src/dcos/genconf/ip-detect' do
+    source 'ip-detect.erb'
+    mode '0755'
+    variables(interface: interface)
+  end
+  cookbook_file '/usr/src/dcos/genconf/ip-detect-public' do
+    source 'ip-detect-public'
+    mode '0755'
   end
 end

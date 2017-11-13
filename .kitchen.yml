@@ -1,6 +1,9 @@
 ---
 driver:
   name: vagrant
+  customize:
+    cpus: 2
+    memory: 4096
 
 provisioner:
   name: chef_zero
@@ -9,7 +12,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-7
+  - name: centos-7.4
 
 suites:
   - name: default
@@ -17,4 +20,6 @@ suites:
       - recipe[dcos::default]
     attributes:
       dcos:
-        master_list: ['127.0.0.1']
+        config:
+          master_list: ['127.0.0.1']
+        ip-detect: lo

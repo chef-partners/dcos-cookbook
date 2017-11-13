@@ -1,6 +1,6 @@
 driver:
   name: dokken
-  privileged: true # because Docker and SystemD/Upstart
+  privileged: true # because Docker, systemd, and sysctl
   chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
 
 transport:
@@ -15,6 +15,9 @@ platforms:
   driver:
     image: dokken/centos-7
     pid_one_command: /usr/lib/systemd/systemd
+    # This is needed because dcos-spartan.service does "modprobe dummy"
+    volumes:
+    - /lib/modules:/lib/modules:ro
 
 suites:
   - name: default
@@ -22,4 +25,6 @@ suites:
       - recipe[dcos::default]
     attributes:
       dcos:
-        master_list: ['127.0.0.1']
+        config:
+          master_list: ['127.0.0.1']
+        docker_storage_driver: 'vfs'

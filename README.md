@@ -3,7 +3,7 @@
 Description
 ===========
 
-Manage deployment and configuration of underlying Mesosphere DCOS installation.
+Manage deployment and configuration of underlying Mesosphere DC/OS installation.
 
 Requirements
 ------------
@@ -13,34 +13,45 @@ Only Red Hat or CentOS 7.x are currently supported.
 Usage
 ==========
 
-The behavior of this cookbook is managed by attributes documented in the [attributes file](attributes/default.rb). The `node['dcos']['dcos_role']` attribute controls the DCOS role to apply to the node (default is `master`). The `node['dcos']['master_list']` must be set to specify the list of DCOS master node IPv4 addresses to connect at startup (this must be an odd number of masters).
+The behavior of this cookbook is managed by attributes documented in the [attributes file](attributes/default.rb).
+The `node['dcos']['dcos_role']` attribute controls the DC/OS role to apply to the node (default is `master`). The
+`node['dcos']['config']['master_list']` must be set when `node['dcos']['config']['master_discovery']` is set to
+`static` to specify the list of DC/OS master node IPv4 addresses to connect at startup (this must be an odd number
+of masters and cannot be changed, later).
 
-If you would like to have the stable channel, please flip the `node['dcos']['dcos_earlyaccess']` to `false`.
+This cookbook uses the EarlyAccess channel, by default. Setting `node['dcos']['dcos_version']` to `stable` will
+install the latest stable version of DC/OS (currently `1.9.3`).
 
 Roles
 ----------
 
-You can create a Chef Role and apply it to nodes as necessary to specify `master`, `slave` and `slave_public` as appropriate. Any additional configuration should probably be set as override attributes in an Environment to ensure all nodes receive those global settings.
+You can create a Chef Role and apply it to nodes as necessary to specify `master`, `slave` and `slave_public`, as
+appropriate. Any additional configuration should be set as override attributes in an Environment to ensure that
+all nodes receive those global settings.
 
 ### Example Role dcos_master.rb ###
 ````ruby
 name "dcos_master"
-description "DCOS master role"
+description "DC/OS master role"
 run_list "recipe[dcos]"
 default_attributes "dcos" => {
-    "dcos_role" => "master"
-    "master_list" => [ "10.0.2.10" ]
+    "dcos_role" => "master",
+    "config" => {
+        "master_list" => [ "10.0.2.10" ]
+    }
 }
 ````
 
 ### Example Role dcos_slave.rb ###
 ````ruby
 name "dcos_slave"
-description "DCOS slave role"
+description "DC/OS slave role"
 run_list "recipe[dcos]"
 default_attributes "dcos" => {
-    "dcos_role" => "slave"
-    "master_list" => [ "10.0.2.10" ]
+    "dcos_role" => "slave",
+    "config" => {
+        "master_list" => [ "10.0.2.10" ]
+    }
 }
 ````
 
@@ -50,7 +61,10 @@ Recipe
 default
 -------
 
-Installs the prerequisites for the Mesosphere DCOS installation, including packages, groups and Docker with OverlayFS enabled. It then downloads and runs the installation package with the settings configured by the node's attributes.
+Installs the prerequisites for the Mesosphere DC/OS installation, including packages, and groups.
+Docker with OverlayFS is installed and enabled if `node['dcos']['manage_docker']` is set to true,
+which is the default. Next, the recipe downloads and runs the installation package with the
+settings configured by the attributes under `node['dcos']['config']`.
 
 Testing
 =======
@@ -65,7 +79,9 @@ TBD
 
 Test Kitchen
 ------------
-The included [.kitchen.yml](.kitchen.yml) runs the default master deployment in a generic fashion. The included [.kitchen.local.yml.example](.kitchen.local.yml.example) shows alternate settings for running multi-master with slaves on GCE (you will have to rename and update accordingly).
+The included [.kitchen.yml](.kitchen.yml) runs the default master deployment in a generic fashion.
+The included [.kitchen.local.yml.example](.kitchen.local.yml.example) shows alternate settings for
+running multi-master with slaves on GCE (you will have to rename and update accordingly).
 
 License and Author
 ==================

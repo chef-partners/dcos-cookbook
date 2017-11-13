@@ -1,13 +1,20 @@
 ---
-cluster_name: '<%= node["dcos"]["cluster_name"] %>'
-master_discovery: '<%= node["dcos"]["master_discovery"] %>'
-exhibitor_storage_backend: '<%= node["dcos"]["exhibitor_storage_backend"] %>'
-bootstrap_url: '<%= node["dcos"]["bootstrap_url"] %>'
-master_list:
-<% node["dcos"]["master_list"].each do |ip| %>
-  - <%= ip %>
+<%- @config.each do |k, v| %>
+  <%- next if %w(agent_list public_agent_list master_list resolvers rexray).include?(k) %>
+<%= k %>: '<%= v %>'
 <% end %>
-resolvers:
-<% node["dcos"]["resolvers"].each do |ip| %>
-  - <%= ip %>
+<% %w(agent_list public_agent_list master_list resolvers).each do |n| %>
+  <% if @config.key?(n) && !@config[n].empty? %>
+<%= n %>:
+    <% @config[n].each do |i| %>
+  - <%= i %>
+    <% end %>
+  <% end %>
+<% end %>
+<% unless @config['rexray'].nil? || @config['rexray'].empty? %>
+  <% require 'yaml' %>
+rexray:
+  <%- @config['rexray'].to_hash.dup.to_yaml.lines.drop(1).each do |l| %>
+  <%= l.chomp %>
+  <% end %>
 <% end %>
