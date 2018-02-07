@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 
+gem 'berkshelf'
 gem 'chef'
 gem 'chefspec'
-gem 'kitchen-digitalocean'
-gem 'kitchen-dokken'
-gem 'kitchen-docker'
-gem 'stove'
 gem 'inspec'
+gem 'kitchen-digitalocean'
+gem 'kitchen-docker'
+gem 'kitchen-dokken'
 gem 'kitchen-inspec'
-gem 'berkshelf'
+gem 'stove'
+gem 'zookeeper'
 
 group :lint do
   gem 'cookstyle'

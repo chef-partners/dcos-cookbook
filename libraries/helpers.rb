@@ -1,4 +1,5 @@
 module Dcos
+  # Helper functions
   module Helpers
     def dcos_generate_config_url
       return node['dcos']['dcos_generate_config_url'] if node['dcos'].key?('dcos_generate_config_url')
