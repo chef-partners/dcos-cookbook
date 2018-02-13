@@ -2,7 +2,7 @@ name 'dcos'
 maintainer 'Chef Software, Inc.'
 maintainer_email 'partnereng@chef.io'
 license 'Apache-2.0'
-version '1.0.0'
+version '1.1.0'
 description 'Installs/Configures Mesosphere DC/OS'
 long_description 'Installs/Configures Mesosphere DC/OS'
 
