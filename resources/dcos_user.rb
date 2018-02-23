@@ -37,7 +37,7 @@ end
 
 action :create do
   # If there is a change, remove and replace the current data
-  converge_if_changed do
+  converge_if_changed :email do
     z = Zookeeper.new(zk_host)
     z.delete(path: "/dcos/users/#{email}") # Fails cleanly if it doesn't exist.
     z.create(path: "/dcos/users/#{email}", data: email)
