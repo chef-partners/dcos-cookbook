@@ -3,7 +3,7 @@
 # Cookbook Name:: dcos
 #
 # Copyright 2016 Chef Software, Inc
-# Copyright 2017 Chris Gianelloni
+# Copyright 2017-2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,18 +18,33 @@
 # limitations under the License.
 #
 
-default['dcos']['dcos_earlyaccess'] = true
+# DC/OS Edition/Version Setup
+default['dcos']['dcos_earlyaccess'] = false
 default['dcos']['dcos_version'] = node['dcos']['dcos_earlyaccess'] ? 'earlyaccess' : 'stable'
+default['dcos']['dcos_enterprise'] = false
+
+# DC/OS role
 default['dcos']['dcos_role'] = 'master' # 'master', 'slave' or 'slave_public'
 
+# DC/OS license (Enterprise only, 1.11+)
+default['dcos']['dcos_license_text'] = nil
+
+# DC/OS config.yaml
 default['dcos']['config']['bootstrap_url'] = 'file:///usr/src/dcos/genconf/serve'
 default['dcos']['config']['cluster_name'] = 'DCOS'
 default['dcos']['config']['exhibitor_storage_backend'] = 'static'
+default['dcos']['config']['ip_detect_public_filename'] = 'genconf/ip-detect-public'
 default['dcos']['config']['master_discovery'] = 'static'
 # ipv4 only, must be odd number 1-9
 default['dcos']['config']['master_list'] = []
 # upstream DNS for MesosDNS
 default['dcos']['config']['resolvers'] = ['8.8.8.8', '8.8.4.4']
+default['dcos']['config']['security'] = 'permissive' if node['dcos']['dcos_enterprise']
+default['dcos']['config']['superuser_username'] = 'dcos' if node['dcos']['dcos_enterprise']
+# WARNING: this password is 'dcos', CHANGE IT!
+default['dcos']['config']['superuser_password_hash'] =
+  '$6$rounds=656000$jebZ9.mHzOGexfOq$NEpBlsUot6mGe3ExpfOGioRY02.WEFYlZCIeTDtq7d648FI4oyPt07w8tgNVub0PNVxRT0am9NbWDiYCHYkM9.' \
+  if node['dcos']['dcos_enterprise']
 
 default['dcos']['manage_docker'] = true
 default['dcos']['docker_storage_driver'] = 'overlay'

@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright 2016, Chef Software, Inc.
+# Copyright 2017-2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +40,7 @@ package %w(
 
 group 'nogroup'
 
-include_recipe 'chef-yum-docker' if node['dcos']['docker_version']
+include_recipe 'chef-yum-docker' if node['dcos']['manage_docker']
 
 # Install docker with overlayfs
 docker_service 'default' do
@@ -55,9 +56,24 @@ directory '/usr/src/dcos/genconf' do
   recursive true
 end
 
+# Only used on DC/OS Enterprise 1.11+
+file '/usr/src/dcos/genconf/license.txt' do
+  content node['dcos']['dcos_license_text']
+  sensitive true
+  only_if { dcos_enterprise? && node['dcos']['dcos_version'].to_f >= 1.11 }
+end
+
 template '/usr/src/dcos/genconf/config.yaml' do
   source 'config.yaml.erb'
   variables config: node['dcos']['config']
+end
+
+# Only supported on DC/OS Enterprise 1.11+
+remote_file '/usr/src/dcos/genconf/fault-domain-detect' do
+  # Pull latest from GitHub
+  source 'https://raw.githubusercontent.com/dcos/dcos/master/gen/fault-domain-detect/cloud.sh'
+  mode '0755'
+  only_if { dcos_enterprise? && node['dcos']['dcos_version'].to_f >= 1.11 }
 end
 
 remote_file '/usr/src/dcos/dcos_generate_config.sh' do
