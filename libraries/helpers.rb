@@ -14,7 +14,7 @@ module Dcos
 
     def dcos_base_url
       case node['dcos']['dcos_version']
-      when '1.10.4', '1.10.2', '1.10.1', '1.10.0', '1.9.7', '1.9.6', '1.9.5', '1.9.4', '1.9.3', '1.9.2', '1.9.1', '1.8.9'
+      when '1.11.0', '1.10.5', '1.10.4', '1.10.2', '1.10.1', '1.10.0', '1.9.7', '1.9.6', '1.9.5', '1.9.4', '1.9.3', '1.9.2', '1.9.1', '1.8.9'
         "https://downloads.dcos.io/dcos/stable/#{node['dcos']['dcos_version']}"
       when 'EarlyAccess', 'earlyaccess'
         'https://downloads.dcos.io/dcos/EarlyAccess'
@@ -25,7 +25,11 @@ module Dcos
 
     def dcos_commit_id
       case node['dcos']['dcos_version']
-      when 'stable', '1.10.4'
+      when 'stable', '1.11.0'
+        'b6d6ad4722600877fde2860122f870031d109da3'
+      when '1.10.5'
+        '5831285e56a88d3f54446a987a0384f915832f40'
+      when '1.10.4'
         '2d45a8f9e277a60007f277f70f01d076c913a7fe'
       when '1.10.2'
         '12b494a3309c65a22b7d5553debd1c053e008a31'
