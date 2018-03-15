@@ -39,7 +39,7 @@ package %w(
 
 group 'nogroup'
 
-include_recipe 'chef-yum-docker' if node['dcos']['docker_version']
+include_recipe 'chef-yum-docker' if node['dcos']['manage_docker']
 
 # Install docker with overlayfs
 docker_service 'default' do
