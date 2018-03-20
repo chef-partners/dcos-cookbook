@@ -13,7 +13,7 @@ module Dcos
     end
 
     def dcos_enterprise?
-      node['dcos']['dcos_enterprise']
+      node['dcos']['dcos_enterprise'].to_s == 'true'
     end
 
     private
