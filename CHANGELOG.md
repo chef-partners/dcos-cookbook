@@ -1,6 +1,14 @@
 # Change Log
 
-## [v1.2.0]((https://github.com/chef-partners/dcos-cookbook/tree/v1.1.0)
+## [v1.2.1]((https://github.com/chef-partners/dcos-cookbook/tree/v1.2.1)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.0...v1.2.1)
+
+**Merged pull requests:**
+
+- Remove zookeeper Gem requirements [\#14](https://github.com/chef-partners/dcos-cookbook/pull/14) ([wolf31o2](https://github.com/wolf31o2))
+
+## [v1.2.0]((https://github.com/chef-partners/dcos-cookbook/tree/v1.2.0)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.1.0...v1.2.0)
 
