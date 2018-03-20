@@ -1,4 +1,4 @@
-Style/FileName:
+FileName:
   Exclude:
     - 'recipes/_ip-detect.rb'
 
