@@ -3,7 +3,8 @@
 Description
 ===========
 
-Manage deployment and configuration of underlying Mesosphere DC/OS installation.
+Manage deployment and configuration of underlying Mesosphere DC/OS installation. This cookbook supports both DC/OS
+OSS installations (default) and DC/OS Enterprise.
 
 Requirements
 ------------
@@ -19,8 +20,10 @@ The `node['dcos']['dcos_role']` attribute controls the DC/OS role to apply to th
 `static` to specify the list of DC/OS master node IPv4 addresses to connect at startup (this must be an odd number
 of masters and cannot be changed, later).
 
-This cookbook uses the EarlyAccess channel, by default. Setting `node['dcos']['dcos_version']` to `stable` will
-install the latest stable version of DC/OS (currently `1.9.3`).
+This cookbook uses the stable channel, by default. Setting `node['dcos']['dcos_version']` to `earlyaccess` will
+install the latest EarlyAccess version of DC/OS OSS. Enterprise support can be enabled by setting
+`node['dcos']['dcos_enterprise']` to `true` and providing a license key in `node['dcos']['dcos_license_text']`
+via whichever manner you prefer.
 
 Roles
 ----------
@@ -103,7 +106,7 @@ There is basic coverage for the default recipe.
 
 InSpec
 ------
-TBD
+There is basic functional testing of the DC/OS OSS setup for a single master node.
 
 Test Kitchen
 ------------
