@@ -1,8 +1,17 @@
 # Change Log
 
-## [v1.1.0](https://github.com/chef-partners/dcos-cookbook/tree/v1.0.0)
+## [v1.2.0]((https://github.com/chef-partners/dcos-cookbook/tree/v1.1.0)
 
-[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.0.0...v1.0.0)
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.1.0...v1.2.0)
+
+**Merged pull requests:**
+
+- Add dcos_user custom resource [\#10](https://github.com/chef-partners/dcos-cookbook/pull/10) ([rbanffy](https://github.com/rbanffy))
+- Support DC/OS Enterprise [\#13](https://github.com/chef-partners/dcos-cookbook/pull/13) ([wolf31o2](https://github.com/wolf31o2))
+
+## [v1.1.0](https://github.com/chef-partners/dcos-cookbook/tree/v1.1.0)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.0.0...v1.1.0)
 
 **Merged pull requests:**
 
