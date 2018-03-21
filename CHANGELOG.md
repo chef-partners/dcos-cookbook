@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.2.2](https://github.com/chef-partners/dcos-cookbook/tree/v1.2.2)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.1...v1.2.2)
+
+**Merged pull requests:**
+
+- Create a preflight-check execute block [\#15](https://github.com/chef-partners/dcos-cookbook/pull/15) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v1.2.1](https://github.com/chef-partners/dcos-cookbook/tree/v1.2.1)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.0...v1.2.1)
