@@ -95,6 +95,15 @@ file '/usr/src/dcos/genconf/serve/dcos_install.sh' do
   mode '0755'
 end
 
+# We're going to poll this up to 30 times, to prevent issues where a port may temporarily be in use
+execute 'preflight-check' do
+  command "/usr/src/dcos/genconf/serve/dcos_install.sh --preflight-only #{node['dcos']['dcos_role']}"
+  retry_delay 1
+  retries 30
+  action :run
+  not_if { ::File.exist?('/opt/mesosphere/environment') } # assume DC/OS is installed
+end
+
 execute 'dcos_install' do
   command "/usr/src/dcos/genconf/serve/dcos_install.sh #{node['dcos']['dcos_role']}"
   creates '/opt/mesosphere/environment'
