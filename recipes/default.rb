@@ -74,6 +74,7 @@ remote_file '/usr/src/dcos/genconf/fault-domain-detect' do
   source 'https://raw.githubusercontent.com/dcos/dcos/master/gen/fault-domain-detect/cloud.sh'
   mode '0755'
   only_if { dcos_enterprise? && node['dcos']['dcos_version'].to_f >= 1.11 }
+  not_if { node['dcos']['config'].key?('platform') && node['dcos']['config']['platform'] == 'onprem' }
 end
 
 remote_file '/usr/src/dcos/dcos_generate_config.sh' do
