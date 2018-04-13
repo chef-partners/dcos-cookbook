@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: dcos
-# Recipe:: default
+# Resource:: dcos_user
 #
 # Copyright 2018, Chef Software, Inc.
 #
