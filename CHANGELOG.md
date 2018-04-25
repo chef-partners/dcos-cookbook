@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.2.3](https://github.com/chef-partners/dcos-cookbook/tree/v1.2.3)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.2...v1.2.3)
+
+**Merged pull requests:**
+
+- Guard cloud fault-domain-detect script when onprem [\#16](https://github.com/chef-partners/dcos-cookbook/pull/16) ([wolf31o2](https://github.com/wolf31o2))
+- Helper: dcos_cluster_address [\#18](https://github.com/chef-partners/dcos-cookbook/pull/18) ([wolf31o2](https://github.com/wolf31o2))
+- Support DC/OS 1.10.6 and 1.11.1 [\#19](https://github.com/chef-partners/dcos-cookbook/pull/19) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v1.2.2](https://github.com/chef-partners/dcos-cookbook/tree/v1.2.2)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.1...v1.2.2)
