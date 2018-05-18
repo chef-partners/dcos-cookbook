@@ -41,5 +41,6 @@ else
     cookbook node['dcos']['ip-detect-public']['cookbook']
     source node['dcos']['ip-detect-public']['source']
     mode '0755'
+    not_if { node['dcos']['ip-detect-public']['source'].nil? }
   end
 end
