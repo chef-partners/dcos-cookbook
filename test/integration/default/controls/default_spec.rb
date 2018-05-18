@@ -71,7 +71,6 @@ end
   dcos-exhibitor
   dcos-marathon
   dcos-mesos-master
-  dcos-spartan
 ).each do |svc|
   describe service(svc) do
     it { should be_installed }
@@ -95,7 +94,6 @@ end
 end
 
 %w(
-  /etc/mesosphere/setup-flags/cluster-packages.json
   /etc/mesosphere/setup-flags/repository-url
 ).each do |conf|
   describe file(conf) do

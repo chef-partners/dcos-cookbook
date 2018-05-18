@@ -40,6 +40,10 @@ describe 'dcos::default' do
       expect(chef_run).to install_package(%w(curl ipset tar unzip xz))
     end
 
+    it 'installs net-tools' do
+      expect(chef_run).to install_package('net-tools')
+    end
+
     it 'creates group[nogroup]' do
       expect(chef_run).to create_group('nogroup')
     end
@@ -76,6 +80,10 @@ describe 'dcos::default' do
       expect(chef_run).to create_file('/usr/src/dcos/genconf/serve/dcos_install.sh').with(mode: '0755')
     end
 
+    it 'executes[preflight-check]' do
+      expect(chef_run).to run_execute('preflight-check')
+    end
+
     it 'executes[dcos_install]' do
       expect(chef_run).to run_execute('dcos_install').with(user: 'root')
     end
@@ -87,6 +95,29 @@ describe 'dcos::default' do
       it "executes[check-#{svc}-up]" do
         expect(chef_run).to run_execute("check-#{svc}-up")
       end
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+  end
+
+  context 'DC/OS Enterprise 1.11' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611') do |node|
+        node.override['dcos']['dcos_enterprise'] = true
+        node.override['dcos']['dcos_version'] = '1.11.1'
+        node.override['dcos']['dcos_license_text'] = 'STUB'
+        stub_command(/ping -c1 /).and_return(false)
+      end.converge(described_recipe)
+    end
+
+    it 'creates genconf/license.txt' do
+      expect(chef_run).to create_file('/usr/src/dcos/genconf/license.txt')
+    end
+
+    it 'creates genconf/fault-domain-detect' do
+      expect(chef_run).to create_cookbook_file('/usr/src/dcos/genconf/fault-domain-detect')
     end
 
     it 'converges successfully' do
