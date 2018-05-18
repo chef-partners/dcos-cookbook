@@ -79,6 +79,7 @@ cookbook_file '/usr/src/dcos/genconf/fault-domain-detect' do
   source node['dcos']['fault-domain-detect']['source']
   mode '0755'
   only_if { dcos_enterprise? && node['dcos']['dcos_version'].to_f >= 1.11 }
+  not_if { node['dcos']['fault-domain-detect']['source'].nil? }
 end
 
 remote_file '/usr/src/dcos/dcos_generate_config.sh' do
