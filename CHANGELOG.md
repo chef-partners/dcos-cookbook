@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.3.0](https://github.com/chef-partners/dcos-cookbook/tree/v1.3.0)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.3...v1.3.0)
+
+**Merged pull requests:**
+
+- Recipe for DC/OS CLI [\#17](https://github.com/chef-partners/dcos-cookbook/pull/17) ([wolf31o2](https://github.com/wolf31o2))
+- Updates from session w/ Justin Lee [\#20](https://github.com/chef-partners/dcos-cookbook/pull/20) ([wolf31o2](https://github.com/wolf31o2)) ([justinrlee](https://github.com/justinrlee))
+- Allow disabling scripts using nil source [\#21](https://github.com/chef-partners/dcos-cookbook/pull/21) ([wolf31o2](https://github.com/wolf31o2)) 
+
 ## [v1.2.3](https://github.com/chef-partners/dcos-cookbook/tree/v1.2.3)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.2.2...v1.2.3)
