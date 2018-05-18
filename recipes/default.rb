@@ -38,6 +38,10 @@ package %w(
   xz
 )
 
+# Hard-coded `ifconfig` means we have to include this
+# https://github.com/apache/mesos/blob/a741b15e889de3242e3aa7878105ab9d946f6ea2/src/slave/containerizer/mesos/isolators/network/cni/cni.cpp#L2106
+package 'net-tools'
+
 group 'nogroup'
 
 include_recipe 'chef-yum-docker' if node['dcos']['manage_docker']
@@ -69,12 +73,12 @@ template '/usr/src/dcos/genconf/config.yaml' do
 end
 
 # Only supported on DC/OS Enterprise 1.11+
-remote_file '/usr/src/dcos/genconf/fault-domain-detect' do
+cookbook_file '/usr/src/dcos/genconf/fault-domain-detect' do
   # Pull latest from GitHub
-  source 'https://raw.githubusercontent.com/dcos/dcos/master/gen/fault-domain-detect/cloud.sh'
+  cookbook node['dcos']['fault-domain-detect']['cookbook']
+  source node['dcos']['fault-domain-detect']['source']
   mode '0755'
   only_if { dcos_enterprise? && node['dcos']['dcos_version'].to_f >= 1.11 }
-  not_if { node['dcos']['config'].key?('platform') && node['dcos']['config']['platform'] == 'onprem' }
 end
 
 remote_file '/usr/src/dcos/dcos_generate_config.sh' do

@@ -1,6 +1,6 @@
 ---
 <%- @config.each do |k, v| %>
-  <%- next if %w(agent_list public_agent_list master_list resolvers rexray).include?(k) %>
+  <%- next if %w(agent_list public_agent_list master_list resolvers rexray rexray_config).include?(k) %>
 <%= k %>: '<%= v %>'
 <% end %>
 <% %w(agent_list public_agent_list master_list resolvers).each do |n| %>
@@ -11,10 +11,12 @@
     <% end %>
   <% end %>
 <% end %>
-<% unless @config['rexray'].nil? || @config['rexray'].empty? %>
-  <% require 'yaml' %>
-rexray:
-  <%- @config['rexray'].to_hash.dup.to_yaml.lines.drop(1).each do |l| %>
-  <%= l.chomp %>
+<% %w(rexray rexray_config).each do |key| %>
+  <% unless @config[key].nil? || @config[key].empty? %>
+<%= key %>:
+    <% require 'yaml' %>
+    <%- JSON.parse(@config[key].to_json).to_yaml.lines.drop(1).each do |l| %>
+    <%= l.chomp %>
+    <% end %>
   <% end %>
 <% end %>

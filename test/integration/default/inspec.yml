@@ -1,6 +1,6 @@
 name: default-dcos-master
 title: Integration tests for DC/OS master with Oauth
 summary: This InSpec profile contains integration tests for DC/OS cookbook
-version: 0.0.1
+version: 0.0.2
 supports:
   - os-family: linux

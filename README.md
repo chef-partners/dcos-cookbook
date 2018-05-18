@@ -6,6 +6,9 @@ Description
 Manage deployment and configuration of underlying Mesosphere DC/OS installation. This cookbook supports both DC/OS
 OSS installations (default) and DC/OS Enterprise.
 
+Note: The default username and password for DC/OS Enterprise is `bootstrapuser`/`deleteme` and can be changed by setting
+`node['dcos']['config']['superuser_username']` and `node['dcos']['config']['superuser_password_hash']`, respectively.
+
 Requirements
 ------------
 

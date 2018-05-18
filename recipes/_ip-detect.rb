@@ -38,7 +38,8 @@ else
     variables(interface: interface)
   end
   cookbook_file '/usr/src/dcos/genconf/ip-detect-public' do
-    source 'ip-detect-public'
+    cookbook node['dcos']['ip-detect-public']['cookbook']
+    source node['dcos']['ip-detect-public']['source']
     mode '0755'
   end
 end
