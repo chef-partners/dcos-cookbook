@@ -121,10 +121,8 @@ License and Author
 ==================
 
 Author:: Matt Ray (<matt@chef.io>)
-Author:: Chris Gianelloni (<wolf31o2@gmail.com>)
 
 Copyright 2016-2018 Chef Software, Inc.
-Copyright 2017-2018 Chris Gianelloni
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
