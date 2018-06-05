@@ -33,6 +33,7 @@ module Dcos
     def dcos_base_url
       case node['dcos']['dcos_version']
       when
+        '1.11.2',
         '1.11.1',
         '1.11.0',
         '1.10.6',
@@ -61,7 +62,9 @@ module Dcos
 
     def dcos_commit_id
       case node['dcos']['dcos_version']
-      when 'stable', '1.11.1'
+      when 'stable', '1.11.2'
+        'e871b90b33ba43478f6ba904b7289ffbf79550dd'
+      when '1.11.1'
         'fefb2e4d76f397d84f450086b14eba6ca7572cd7'
       when '1.11.0'
         'b6d6ad4722600877fde2860122f870031d109da3'
