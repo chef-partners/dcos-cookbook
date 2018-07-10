@@ -33,6 +33,7 @@ module Dcos
     def dcos_base_url
       case node['dcos']['dcos_version']
       when
+        '1.11.3',
         '1.11.2',
         '1.11.1',
         '1.11.0',
@@ -55,14 +56,16 @@ module Dcos
       when 'EarlyAccess', 'earlyaccess'
         'https://downloads.dcos.io/dcos/EarlyAccess'
       else # stable or older releases
-        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.11.0' if dcos_enterprise?
+        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.11.3' if dcos_enterprise?
         'https://downloads.dcos.io/dcos/stable'
       end
     end
 
     def dcos_commit_id
       case node['dcos']['dcos_version']
-      when 'stable', '1.11.2'
+      when 'stable', '1.11.3'
+        '96f364a598e5f06371794ebb7c40fff65d0c289f'
+      when '1.11.2'
         'e871b90b33ba43478f6ba904b7289ffbf79550dd'
       when '1.11.1'
         'fefb2e4d76f397d84f450086b14eba6ca7572cd7'
