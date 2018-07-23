@@ -1,5 +1,17 @@
 # Change Log
 
+## [v2.0.0](https://github.com/chef-partners/dcos-cookbook/tree/v2.0.0)
+
+**BREAKING CHANGES**
+
+This cookbook has upgraded its dependencies and now requires at least Chef 12.15+
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.3.2...v2.0.0)
+
+**Merged pull requests:**
+
+- Use latest docker cookbook [\#24](https://github.com/chef-partners/dcos-cookbook/pull/24) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v1.3.2](https://github.com/chef-partners/dcos-cookbook/tree/v1.3.2)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v1.3.1...v1.3.2)
