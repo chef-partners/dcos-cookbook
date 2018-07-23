@@ -44,8 +44,6 @@ package 'net-tools'
 
 group 'nogroup'
 
-include_recipe 'chef-yum-docker' if node['dcos']['manage_docker']
-
 # Install docker with overlayfs
 docker_service 'default' do
   storage_driver node['dcos']['docker_storage_driver']
