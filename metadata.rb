@@ -4,7 +4,7 @@ maintainer_email 'partnereng@chef.io'
 license          'Apache-2.0'
 description      'Installs/Configures Mesosphere DC/OS'
 long_description 'Installs/Configures Mesosphere DC/OS'
-version          '2.0.0'
+version          '2.0.1'
 
 source_url 'https://github.com/chef-partners/dcos-cookbook' if
   respond_to?(:source_url)
