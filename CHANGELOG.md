@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.1.0](https://github.com/chef-partners/dcos-cookbook/tree/v2.1.0)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v2.0.2...v2.1.0)
+
+**Merged pull requests:**
+
+- Support DC/OS 1.12.0 and 1.11.7 [\#27](https://github.com/chef-partners/dcos-cookbook/pull/27) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v2.0.2](https://github.com/chef-partners/dcos-cookbook/tree/v2.0.2)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v2.0.1...v2.0.2)
