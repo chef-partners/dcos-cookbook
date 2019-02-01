@@ -33,7 +33,7 @@ module Dcos
     def dcos_base_url
       v = node['dcos']['dcos_version']
       return 'https://downloads.dcos.io/dcos/EarlyAccess' if v.downcase == 'earlyaccess'
-      if v.to_f >= 1.10 || v.split('.').drop(1).join('.').to_f > 9.0 || v == '1.8.9' # 1.9.0 and < 1.8.9 use else method
+      if v.to_f >= 1.10
         return "https://downloads.mesosphere.com/dcos-enterprise/stable/#{v}" if dcos_enterprise?
         return "https://downloads.dcos.io/dcos/stable/#{v}"
       else # stable or older releases
@@ -84,34 +84,6 @@ module Dcos
         'd932fc405eb80d8e5b3516eaabf2bd41a2c25c9f'
       when '1.10.0'
         'e38ab2aa282077c8eb7bf103c6fff7b0f08db1a4'
-      when '1.9.10'
-        'afa41d022b61a1b6e5723799ec6617c90621cf8a'
-      when '1.9.9'
-        'e52b4e2452970d45a39183bfd0260fb28bd920b6'
-      when '1.9.8'
-        'd1e4db6b234cd3d0b54d2be04b0b088f72870d88'
-      when '1.9.7'
-        '888d171dbd85d2a56cc046b95c751989ea6c7604'
-      when '1.9.6'
-        'f25e9dcfd0abae4de8bc18cc1fc9584a7a0a586a'
-      when '1.9.5'
-        '4308d88bfc0dd979703f4ef500ce415c5683b3c5'
-      when '1.9.4'
-        'ff2481b1d2c1008010bdc52554f872d66d9e5904'
-      when '1.9.3'
-        '744f5ea28fc52517e344a5250a5fd12554da91b8'
-      when '1.9.2'
-        'af6ddc2f5e95b1c1d9bd9fd3d3ef1891928136b9'
-      when '1.9.1'
-        '008d3bfe4acca190100fcafad9a18a205a919590'
-      when '1.9.0'
-        '0ce03387884523f02624d3fb56c7fbe2e06e181b'
-      when '1.8.9'
-        '65d66d7f399fe13bba8960c1f2c42ef9fa5dcf8d'
-      when '1.8.8'
-        '602edc1b4da9364297d166d4857fc8ed7b0b65ca'
-      when '1.8.7'
-        '1b43ff7a0b9124db9439299b789f2e2dc3cc086c'
       end
     end
   end
