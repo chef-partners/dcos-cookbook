@@ -37,15 +37,21 @@ module Dcos
         return "https://downloads.mesosphere.com/dcos-enterprise/stable/#{v}" if dcos_enterprise?
         return "https://downloads.dcos.io/dcos/stable/#{v}"
       else # stable or older releases
-        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.12.0' if dcos_enterprise?
+        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.12.1' if dcos_enterprise?
         'https://downloads.dcos.io/dcos/stable'
       end
     end
 
     def dcos_commit_id
       case node['dcos']['dcos_version']
-      when 'stable', '1.12.0'
+      when 'stable', '1.12.1'
+        'aad01aaa24f90fd83b626acad5069e8328bbcac9'
+      when '1.12.0'
         '6156e8f5cb2ad123aa25d116795867c49619be72'
+      when '1.11.9'
+        'c8ea1f27294953dd25bd9847d3fc7cd53784824f'
+      when '1.11.8'
+        'd319f594d2ea1102ef1cf48c33e8a24484cc89a3'
       when '1.11.7'
         '0bfccbeabe1423aa8fec2cc5b8d86b8948c06587'
       when '1.11.6'

@@ -28,3 +28,4 @@ suites:
         config:
           master_list: ['127.0.0.1']
         docker_storage_driver: 'vfs'
+        ip-detect: 'lo'
