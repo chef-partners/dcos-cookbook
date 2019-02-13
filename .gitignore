@@ -1,5 +1,4 @@
 .vagrant
-Berksfile.lock
 *~
 *#
 .#*
@@ -17,3 +16,5 @@ bin/*
 .direnv/
 .envrc
 .ruby-version
+Berksfile.lock
+berks-cookbooks/*

@@ -1,5 +1,18 @@
 # Change Log
 
+## [v3.0.0](https://github.com/chef-partners/dcos-cookbook/tree/v3.0.0)
+
+**BREAKING CHANGES**
+
+This cookbook has dropped support for DC/OS versions prior to 1.10.0, which are no longer supported by Mesosphere.
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v2.2.0...v3.0.0)
+
+**Merged pull requests:**
+
+- Drop support for DC/OS older than 1.10 [\#29](https://github.com/chef-partners/dcos-cookbook/pull/29) ([wolf31o2](https://github.com/wolf31o2))
+- Support DC/OS 1.12.2, 1.11.10, and 1.10.11 [\#30](https://github.com/chef-partners/dcos-cookbook/pull/30) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v2.2.0](https://github.com/chef-partners/dcos-cookbook/tree/v2.2.0)
 
 [Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v2.1.0...v2.2.0)
