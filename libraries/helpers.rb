@@ -5,7 +5,7 @@ module Dcos
       return node['dcos']['dcos_generate_config_url'] if node['dcos'].key?('dcos_generate_config_url')
       return "#{dcos_base_url}/dcos_generate_config.ee.sh" if dcos_enterprise?
       case node['dcos']['dcos_version']
-      when 'EarlyAccess', 'earlyaccess'
+      when 'EarlyAccess', 'earlyaccess', 'stable'
         "#{dcos_base_url}/dcos_generate_config.sh"
       else
         "#{dcos_base_url}/commit/#{dcos_commit_id}/dcos_generate_config.sh"
@@ -37,17 +37,21 @@ module Dcos
         return "https://downloads.mesosphere.com/dcos-enterprise/stable/#{v}" if dcos_enterprise?
         return "https://downloads.dcos.io/dcos/stable/#{v}"
       else # stable or older releases
-        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.12.1' if dcos_enterprise?
+        return 'https://downloads.mesosphere.com/dcos-enterprise/stable/1.12.2' if dcos_enterprise?
         'https://downloads.dcos.io/dcos/stable'
       end
     end
 
     def dcos_commit_id
       case node['dcos']['dcos_version']
-      when 'stable', '1.12.1'
+      when '1.12.2'
+        'ed29688084953193ebb3893765f76e98d6d2533c'
+      when '1.12.1'
         'aad01aaa24f90fd83b626acad5069e8328bbcac9'
       when '1.12.0'
         '6156e8f5cb2ad123aa25d116795867c49619be72'
+      when '1.11.10'
+        'b5442be7ed9bb91d26e34f17e9af39f55ff8e111'
       when '1.11.9'
         'c8ea1f27294953dd25bd9847d3fc7cd53784824f'
       when '1.11.8'
@@ -68,6 +72,12 @@ module Dcos
         'fefb2e4d76f397d84f450086b14eba6ca7572cd7'
       when '1.11.0'
         'b6d6ad4722600877fde2860122f870031d109da3'
+      when '1.10.11'
+        '72f5ca1cae6d4915c95f3f6e79ad8bcf9cd05db1'
+      when '1.10.10'
+        '9aac1e29a7c0acf818deaaf2d825c0402fa87060'
+      when '1.10.9'
+        '5af82595760088ed7a5296cfa91f38e030c67556'
       when '1.10.8'
         '61de47be4a8588ee5c4168ec297ad2135d5e5ed1'
       when '1.10.7'
