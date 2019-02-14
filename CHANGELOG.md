@@ -1,5 +1,13 @@
 # Change Log
 
+## [v3.0.1](https://github.com/chef-partners/dcos-cookbook/tree/v3.0.1)
+
+[Full Changelog](https://github.com/chef-partners/dcos-cookbook/compare/v3.0.0...v3.0.1)
+
+**Merged pull requests:**
+
+- Simplify download URL generation [\#31](https://github.com/chef-partners/dcos-cookbook/pull/31) ([wolf31o2](https://github.com/wolf31o2))
+
 ## [v3.0.0](https://github.com/chef-partners/dcos-cookbook/tree/v3.0.0)
 
 **BREAKING CHANGES**
