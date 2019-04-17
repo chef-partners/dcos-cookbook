@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright 2016, Chef Software, Inc.
-# Copyright 2017-2018 Chris Gianelloni
+# Copyright 2017-2019 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,29 +18,36 @@
 # limitations under the License.
 #
 
-# Prereqs
-include_recipe 'selinux::permissive'
+# Prereqs on RHEL
+include_recipe 'selinux::permissive' unless platform_family?('debian')
 
 %w(
   firewalld
   rsyslog
+  systemd-resolved
 ).each do |svc|
   service svc do
     action %i(stop disable)
   end
 end
 
+# Hard-coded `ifconfig` means we have to include "net-tools"
+# https://github.com/apache/mesos/blob/a741b15e889de3242e3aa7878105ab9d946f6ea2/src/slave/containerizer/mesos/isolators/network/cni/cni.cpp#L2106
 package %w(
   curl
   ipset
+  net-tools
   tar
   unzip
-  xz
 )
 
-# Hard-coded `ifconfig` means we have to include this
-# https://github.com/apache/mesos/blob/a741b15e889de3242e3aa7878105ab9d946f6ea2/src/slave/containerizer/mesos/isolators/network/cni/cni.cpp#L2106
-package 'net-tools'
+pkg =
+  if platform_family?('debian')
+    ['libpopt0', 'xz-utils']
+  else
+    'xz'
+  end
+package pkg
 
 group 'nogroup'
 
@@ -97,6 +104,32 @@ end
 
 file '/usr/src/dcos/genconf/serve/dcos_install.sh' do
   mode '0755'
+end
+
+# Ubuntu hacks
+link '/usr/bin/mkdir' do
+  to '/bin/mkdir'
+  only_if { platform_family?('debian') }
+end
+
+link '/usr/bin/ln' do
+  to '/bin/ln'
+  only_if { platform_family?('debian') }
+end
+
+link '/usr/bin/rm' do
+  to '/bin/rm'
+  only_if { platform_family?('debian') }
+end
+
+link '/usr/bin/tar' do
+  to '/bin/tar'
+  only_if { platform_family?('debian') }
+end
+
+link '/usr/bin/useradd' do
+  to '/usr/sbin/useradd'
+  only_if { platform_family?('debian') }
 end
 
 # We're going to poll this up to 30 times, to prevent issues where a port may temporarily be in use

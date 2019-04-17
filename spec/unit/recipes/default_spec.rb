@@ -29,6 +29,7 @@ describe 'dcos::default' do
     %w(
       firewalld
       rsyslog
+      systemd-resolved
     ).each do |svc|
       it "stops and disables #{svc}" do
         expect(chef_run).to stop_service(svc)
@@ -36,12 +37,8 @@ describe 'dcos::default' do
       end
     end
 
-    it 'installs %w(curl ipset tar unzip xz)' do
-      expect(chef_run).to install_package(%w(curl ipset tar unzip xz))
-    end
-
-    it 'installs net-tools' do
-      expect(chef_run).to install_package('net-tools')
+    it 'installs %w(curl ipset net-tools tar unzip)' do
+      expect(chef_run).to install_package(%w(curl ipset net-tools tar unzip))
     end
 
     it 'creates group[nogroup]' do

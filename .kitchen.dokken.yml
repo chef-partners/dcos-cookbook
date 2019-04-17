@@ -18,6 +18,13 @@ platforms:
     # This is needed because dcos-spartan.service does "modprobe dummy"
     volumes:
     - /lib/modules:/lib/modules:ro
+- name: ubuntu-18
+  driver:
+    image: dokken/ubuntu-18.04
+    pid_one_command: /bin/systemd
+    # This is needed because dcos-spartan.service does "modprobe dummy"
+    volumes:
+    - /lib/modules:/lib/modules:ro
 
 suites:
   - name: default

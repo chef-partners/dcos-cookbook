@@ -18,6 +18,7 @@ chef_version '>= 12.10' if
   oracle
   redhat
   scientific
+  ubuntu
 ).each do |distro|
   supports distro
 end
